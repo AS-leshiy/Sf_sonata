@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <div class="topMenu">
+                    Sf_sonata project
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('fos_user_security_logout') }}" class="switch">LogOut</a>
+                        <a href="{{ path('sonata_admin_dashboard') }}" class="switch">Admin panel</a>
+                        {% else %}
+                        <a href="{{ path('fos_user_security_login') }}" class="switch">LogIn</a>
+                        <a href="{{ path('add_post') }}" class="switch">Propose new post</a>
+                    {% endif %}
+                </div>
+                <hr/>
+            </div>
+
+            <div id="content">
+                {% for post in posts %}
+                    {% if post.draft != false %}
+                        <article class="post">
+                            <h2>
+                                <a href="{{ path('home_article', {slug: post.id}) }}">
+                                    {{ post.title() }}
+                                </a>
+                            </h2>
+                            {{ post.body | slice(0,200) }} ...
+                        </article><br/>
+                    {% endif %}
+                {% else %}
+                    <h2>No article found</h2>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+

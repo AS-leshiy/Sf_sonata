@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <div class="topMenu">
+                    Sf_sonata project
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('fos_user_security_logout') }}" class="switch">LogOut</a>
+                        <a href="{{ path('sonata_admin_dashboard') }}" class="switch">Admin panel</a>
+                        {% else %}
+                        <a href="{{ path('fos_user_security_login') }}" class="switch">LogIn</a>
+                        <a href="{{ path('add_post') }}" class="switch">Propose new post</a>
+                    {% endif %}
+                </div>
+                <hr/>
+            </div>
+
+            <div id="content">
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.body }}</p>
+                <a href="{{path("homepage")}}">back to homepage</a>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

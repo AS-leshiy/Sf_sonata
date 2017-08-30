@@ -2,12 +2,38 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Sf_sonata project{% endblock %}</title>
+        {% block stylesheets %}
+           <style>
+                body { background: #F5F5F5; font: 18px/1.5 sans-serif; color: #666666;}
+                h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
+                h1 { font-size: 36px; }
+                h2 { font-size: 24px; margin-bottom: .5em;}
+                p { margin: 0 0 1em 0; }
+                a { color: #0099ff; }
+                a:hover { text-decoration: none; }
+                
+                #wrapper { background: #FFF; margin: 2em auto; max-width: 800px; width: 95%; }
+                #container { padding: 2em; }
+                #welcome, #content { margin-bottom: 2em; }
+
+                .topMenu{padding: 0 10px; font-size: 24px; }
+                .switch{float:right; font-size: 18px; margin: 10px 5px 0 20px;}
+                .addPost{float: right; padding: 10px 20px; font-size: 12px; min-width: 150px;}
+                
+                .controlBtn{float: right; width: auto; margin: 0 0 0 20px; padding: 10px 40px; font-size: 12px;}
+                .leftPanel, .addPanel {margin-right: 175px;}
+                .addPanel input {width: 100%; line-height: 2em; margin: 5px 0 20px 0;}
+                .addPanel select {width: 100%; height: 2.5em; margin: 5px 0 20px 0;}
+                .addPanel textArea {width: -webkit-fill-available; margin: 5px 0 10px 0;}
+
+            </style>
+        {% endblock %}        
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
+    
+    <body id="{% block body_id %}{% endblock %}">
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
-</html>
+</html> 

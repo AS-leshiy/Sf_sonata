@@ -57,7 +57,6 @@ class BlogPost
         return $this->category;
     }
 
-
     /**
      * Get id
      *
@@ -91,12 +90,11 @@ class BlogPost
     {
         return $this->title;
     }
-
+    
     /**
      * Set body
      *
      * @param string $body
-     *
      * @return BlogPost
      */
     public function setBody($body)
@@ -115,7 +113,7 @@ class BlogPost
     {
         return $this->body;
     }
-
+    
     /**
      * Set draft
      *

@@ -70,6 +70,9 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+sonata_admin:
+    title: Sf_sonata
+    
 sonata_block:
     default_contexts: [cms]
     blocks:

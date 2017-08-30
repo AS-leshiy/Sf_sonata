@@ -18,7 +18,9 @@ class BlogPostAdmin extends AbstractAdmin
         $formMapper
             ->with('Content', array('class' => 'col-md-9'))
                 ->add('title', 'text')
-                ->add('body', 'textarea')
+                ->add('body', 'textarea', array(
+                    'attr' => array('style'=>'height:300px')
+                ))
             ->end()
 
             ->with('Meta data', array('class' => 'col-md-3'))
@@ -29,6 +31,13 @@ class BlogPostAdmin extends AbstractAdmin
                 ->add('category', 'sonata_type_model', array(
                     'class' => 'AppBundle\Entity\Category',
                     'property' => 'name',
+                ))
+            ->end()
+                
+            ->with('Properties', array('class' => 'col-md-3'))
+                ->add('draft','checkbox', array(
+                    'label' => 'Public',
+                    'required' => false
                 ))
             ->end()
         ;

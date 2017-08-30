@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <div class="topMenu">
+                    Sf_sonata project
+                    <a href="{{ path('homepage') }}" class="switch">homepage</a>
+                </div>
+                <hr/>
+            </div>
+
+            <div id="content">
+                <div class="addPanel">
+                    <h2>Login to Your Account</h2>
+                    {% block fos_user_content %}
+                    {% endblock fos_user_content %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
