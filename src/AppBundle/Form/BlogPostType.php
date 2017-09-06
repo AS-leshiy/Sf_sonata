@@ -7,6 +7,7 @@ use AppBundle\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class BlogPostType extends AbstractType
 {
@@ -29,7 +30,11 @@ class BlogPostType extends AbstractType
                 'attr' => ['rows' => 20],
                 'required' => true,
                 'label' => 'Text',
-            ]);
+            ])
+            ->add('imageFile', VichImageType::class, array(
+                'label' => false,
+                'required' => false
+            ));
     }
     
     /**

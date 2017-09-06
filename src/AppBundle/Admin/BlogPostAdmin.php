@@ -8,13 +8,14 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use AppBundle\Entity\BlogPost;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class BlogPostAdmin extends AbstractAdmin
 {
     #public $supportsPreviewMode = true;
     
     protected function configureFormFields(FormMapper $formMapper)
-    {
+    {        
         $formMapper
             ->with('Content', array('class' => 'col-md-9'))
                 ->add('title', 'text')
@@ -40,6 +41,13 @@ class BlogPostAdmin extends AbstractAdmin
                     'required' => false
                 ))
             ->end()
+                
+            ->with('Image', array('class' => 'col-md-3'))
+                ->add('imageFile', VichImageType::class, array(
+                    'label' => false,
+                    'required' => false
+                ))
+            ->end()
         ;
     }
 
@@ -52,6 +60,13 @@ class BlogPostAdmin extends AbstractAdmin
                 ))                
             ->add('category.name')
             ->add('draft')
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                'show' => array(),
+                'edit' => array(),
+                'delete' => array(),
+                )
+            ))
         ;
     }
     
@@ -73,6 +88,10 @@ class BlogPostAdmin extends AbstractAdmin
                 ->add('title', 'text')
                 ->add('body', 'textarea')
              ->end()
+                
+            ->with('Image', array('class' => 'col-md-3'))
+                ->add('imageFile', null, array('template' => 'home/postImg.html.twig'))
+            ->end()
         ;
     }
     
@@ -82,4 +101,11 @@ class BlogPostAdmin extends AbstractAdmin
             ? $object->getTitle()
             : 'Blog Post';
     }
+    /*
+    public function getEditTemplate()
+    {
+        return 'AppBundle:Sonata:base_edit.html.twig';
+    }
+     * 
+     */
 }

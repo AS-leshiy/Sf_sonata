@@ -7,6 +7,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    app.path.product_images: /uploads/images/products
 
 framework:
     #esi: ~
@@ -89,3 +90,23 @@ fos_user:
         #sender_name: "%mailer_user%"
         address: some@gmail.com
         sender_name: anyAdminName
+      
+vich_uploader:
+    db_driver: orm
+    mappings:
+        product_images:
+            uri_prefix:         '%app.path.product_images%'
+            upload_destination: '%kernel.root_dir%/../web/uploads/images/products'
+            
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+        
+# 
+#easy_admin:
+#    entities:
+#        BlogPost:
+#            list:
+#                fields:
+#                    - { property: 'image', template: 'home/postImg.html.twig, base_path: '%app.path.user_contracts%' }
+#

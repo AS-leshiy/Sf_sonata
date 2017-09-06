@@ -1,0 +1,10 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if(vich_uploader_asset(object, 'imageFile') != null) %}
+    <div>
+        <img src="{{ vich_uploader_asset(object, 'imageFile') }}" 
+             style="height:200px; float: left; margin: 0 30px 30px 0;" />
+    </div>
+    {% endif %}
+{% endblock %}
