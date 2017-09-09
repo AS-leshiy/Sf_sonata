@@ -20,7 +20,7 @@ class BlogPostAdmin extends AbstractAdmin
             ->with('Content', array('class' => 'col-md-9'))
                 ->add('title', 'text')
                 ->add('body', 'textarea', array(
-                    'attr' => array('style'=>'height:300px')
+                    'attr' => array('style'=>'height:350px')
                 ))
             ->end()
 
@@ -43,6 +43,9 @@ class BlogPostAdmin extends AbstractAdmin
             ->end()
                 
             ->with('Image', array('class' => 'col-md-3'))
+                ->add('image',null, array(
+                    'required' => false
+                ))
                 ->add('imageFile', VichImageType::class, array(
                     'label' => false,
                     'required' => false
@@ -54,17 +57,17 @@ class BlogPostAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('image','imageFile', array('template' => 'admin/previewImg.html.twig'))
             ->addIdentifier('title', null, array(
-                'route' => array(
-                    'name' => 'edit')
-                ))                
+            'route' => array(
+                'name' => 'edit')
+            ))                
             ->add('category.name')
             ->add('draft')
             ->add('_action', 'actions', array(
                 'actions' => array(
                 'show' => array(),
                 'edit' => array(),
-                'delete' => array(),
                 )
             ))
         ;
@@ -101,11 +104,15 @@ class BlogPostAdmin extends AbstractAdmin
             ? $object->getTitle()
             : 'Blog Post';
     }
-    /*
-    public function getEditTemplate()
+    
+     public function getTemplate($name)
     {
-        return 'AppBundle:Sonata:base_edit.html.twig';
+        switch ($name) {
+            case 'edit':
+                return 'admin/edit.html.twig'; 
+            default:
+                return parent::getTemplate($name);
+        }
     }
-     * 
-     */
+
 }

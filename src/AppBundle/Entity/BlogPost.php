@@ -48,7 +48,7 @@ class BlogPost
     // File upload
     
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $image;
@@ -129,8 +129,9 @@ class BlogPost
      */
     public function setTitle($title)
     {
+        $this->updatedAt = new \DateTime('now');
+        
         $this->title = $title;
-
         return $this;
     }
 

@@ -43,10 +43,19 @@ class HomeController extends Controller
      * @Route("/addnew", name="add_post")
      * @Method({"GET", "POST"})
      */
-    public function addnewAction(Request $request){
+    public function addnewAction(Request $request, \Swift_Mailer $mailer){
         $post = new BlogPost();
         $form = $this->createForm(BlogPostType::class, $post);
         $form->handleRequest($request);
+        
+        $message = (new \Swift_Message('Notification'))
+            ->setFrom('admin@gmail.com')
+            ->setTo('dominant.corp@gmail.com')
+            ->setBody(
+                // app/Resources/views/Emails/registration.html.twig
+                $this->renderView('Emails/new_post_mail.html.twig'), 'text/html'
+                )
+        ;
         
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -54,6 +63,8 @@ class HomeController extends Controller
             $em->flush();
             
             $this->addFlash('success', 'post.created_successfully');
+
+            $mailer->send($message);
             
             return $this->redirectToRoute('homepage');
         }

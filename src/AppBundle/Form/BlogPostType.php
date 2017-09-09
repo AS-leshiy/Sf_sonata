@@ -33,7 +33,8 @@ class BlogPostType extends AbstractType
             ])
             ->add('imageFile', VichImageType::class, array(
                 'label' => false,
-                'required' => false
+                'required' => false,
+                'allow_delete' => false
             ));
     }
     

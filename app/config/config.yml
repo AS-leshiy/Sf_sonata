@@ -65,11 +65,23 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: '%mailer_transport%'
-    host: '%mailer_host%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
-    spool: { type: memory }
+    #transport: '%mailer_transport%'
+    #host: '%mailer_host%'
+    #username: '%mailer_user%'
+    #password: '%mailer_password%'
+    #spool: { type: memory }
+    
+    transport: smtp
+    encryption: ssl
+    auth_mode: ~
+    host: 127.0.0.1
+    port: 8000
+    username:  AS-leshiy
+    password:  null
+    sender_address: dominant.corp@gmail.com
+    spool:
+        type:   file
+        path:   '%kernel.cache_dir%/swiftmailer/spool'
 
 sonata_admin:
     title: Sf_sonata
@@ -86,10 +98,10 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
     from_email:
-        #address: "%mailer_user%"
-        #sender_name: "%mailer_user%"
-        address: some@gmail.com
-        sender_name: anyAdminName
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+        #address: some@gmail.com
+        #sender_name: anyAdminName
       
 vich_uploader:
     db_driver: orm
